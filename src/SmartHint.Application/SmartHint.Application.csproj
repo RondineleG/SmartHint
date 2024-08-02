@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="UseCases\Contatos\**" />
+    <Compile Remove="UseCases\Enderecos\**" />
+    <EmbeddedResource Remove="UseCases\Contatos\**" />
+    <EmbeddedResource Remove="UseCases\Enderecos\**" />
+    <None Remove="UseCases\Contatos\**" />
+    <None Remove="UseCases\Enderecos\**" />
+  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\SmartHint.Core\SmartHint.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Services\" />
+	</ItemGroup>
+</Project>
