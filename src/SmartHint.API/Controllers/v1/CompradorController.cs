@@ -71,7 +71,7 @@ public class CompradorController : ApiBaseController
                 ItensPorPagina = itensPorPagina
             };
 
-           var response = await _getAllCompradorUseCase.Execute(request);
+            var response = await _getAllCompradorUseCase.Execute(request);
 
             _logger.CustomFormatLog(
                 LogEventLevel.Information,
@@ -126,7 +126,7 @@ public class CompradorController : ApiBaseController
     /// <response code="400">Se ocorrer um erro na requisição.</response>
     /// <response code="404">Se o comprador não for encontrado.</response>
     /// <response code="500">Se ocorrer um erro interno no servidor.</response>
-    
+
     [ProducesResponseType(typeof(CompradorRequestDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(CompradorResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

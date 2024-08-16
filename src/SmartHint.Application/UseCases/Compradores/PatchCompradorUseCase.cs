@@ -16,24 +16,24 @@ public class PatchCompradorUseCase(ICompradorServico compradorServico, IMapper m
     {
         try
         {
-            var clienteAlterado = await _compradorServico.AlterarBloqueioAsync(request.Id, request.Bloqueado);
-            switch (clienteAlterado.Status)
+            var clienteAtualizado = await _compradorServico.AlterarBloqueioAsync(request.Id, request.Bloqueado);
+            switch (clienteAtualizado.Status)
             {
                 case ECustomResultStatus.Success:
-                var response = _mapper.Map<CompradorResponseDto>(clienteAlterado);
-                return CustomResult<CompradorResponseDto>.Success(response);
+                var response = _mapper.Map<CompradorResponseDto>(clienteAtualizado.Data);
+                return CustomResult<CompradorResponseDto>.Success(response); 
                 case ECustomResultStatus.EntityNotFound:
                 case ECustomResultStatus.HasError:
                 case ECustomResultStatus.EntityHasError:
                 case ECustomResultStatus.HasValidation:
-                if (clienteAlterado.GeneralErrors != null && clienteAlterado.GeneralErrors.Count != 0)
-                    return CustomResult<CompradorResponseDto>.WithError(clienteAlterado.GeneralErrors);
-                else if (clienteAlterado.EntityErrors != null && clienteAlterado.EntityErrors.Count != 0)
-                    return CustomResult<CompradorResponseDto>.WithError(clienteAlterado.EntityErrors);
-                else if (clienteAlterado.Error != null)
-                    return CustomResult<CompradorResponseDto>.WithError(clienteAlterado.Error);
+                if (clienteAtualizado.GeneralErrors != null && clienteAtualizado.GeneralErrors.Count != 0)
+                    return CustomResult<CompradorResponseDto>.WithError(clienteAtualizado.GeneralErrors);
+                else if (clienteAtualizado.EntityErrors != null && clienteAtualizado.EntityErrors.Count != 0)
+                    return CustomResult<CompradorResponseDto>.WithError(clienteAtualizado.EntityErrors);
+                else if (clienteAtualizado.Error != null)
+                    return CustomResult<CompradorResponseDto>.WithError(clienteAtualizado.Error);
                 else
-                    return CustomResult<CompradorResponseDto>.WithError(clienteAlterado.Message);
+                    return CustomResult<CompradorResponseDto>.WithError(clienteAtualizado.Message);
                 default:
                 return CustomResult<CompradorResponseDto>.WithError("Status inesperado.");
             }

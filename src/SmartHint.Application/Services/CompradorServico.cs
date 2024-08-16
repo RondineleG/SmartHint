@@ -110,7 +110,7 @@ public class CompradorServico : ICompradorServico
         }
     }
 
-    public async Task<CustomResult> AlterarBloqueioAsync(int id, bool bloqueado)
+    public async Task<CustomResult<Comprador>> AlterarBloqueioAsync(int id, bool bloqueado)
     {
         var compradorResult = await _compradorRepositorio.ObterPorIdAsync(id);
         if (compradorResult.Status != ECustomResultStatus.Success || compradorResult.Data == null)
@@ -125,9 +125,13 @@ public class CompradorServico : ICompradorServico
         {
             return await _compradorRepositorio.AtualizarAsync(comprador);
         }
-        catch (Exception exception)
+        catch (CustomResultException cre)
         {
-            return CustomResult.WithError(exception.Message);
+            return CustomResult<Comprador>.WithError(cre.CustomResult.Message);
+        }
+        catch (Exception ex)
+        {
+            return CustomResult<Comprador>.WithError($"Erro ao atualizar comprador: {ex.Message}");
         }
     }
 

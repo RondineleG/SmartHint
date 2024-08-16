@@ -8,5 +8,5 @@ public interface ICompradorServico
     Task<CustomResult<Comprador>> AdicionarAsync(Comprador comprador);
     Task<CustomResult<Comprador>> AtualizarAsync(Comprador comprador);
     Task<CustomResult> DeletarAsync(int id);
-    Task<CustomResult> AlterarBloqueioAsync(int id, bool bloqueado);
+    Task<CustomResult<Comprador>> AlterarBloqueioAsync(int id, bool bloqueado);
 }
